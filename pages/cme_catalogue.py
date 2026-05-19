@@ -15,7 +15,7 @@ st.title('CME catalogue')
 st.write('This catalogue contains coronal mass ejections (CMEs) with a speed > 1000 km/s obtained from the existing CME lists from the Large Angle and Spectrometric Coronagraph Experiment (LASCO) onboard Solar and Heliospheric Observatory (SOHO).')
 
 df_cme_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',',
-                         parse_dates=['Start Time (Observer)', 'Start time (1 AU)', 'Start time (Sun)'])
+                         parse_dates=['Start Time (Observer)', 'Start Time (1 AU)', 'Start Time (Sun)'])
 
 # remove asterix (*) from columns
 # for col in ['Acceleration', 'Mass', 'Kinetic Energy']:
@@ -36,7 +36,7 @@ def store_value(my_key):
 
 
 default_columns = df_cme_org.keys().tolist()
-hid_cols = ["Start time (Sun)", "Start time (1 AU)"]
+hid_cols = ["Start Time (Sun)", "Start Time (1 AU)"]
 for col in hid_cols:
     default_columns.remove(col)
 

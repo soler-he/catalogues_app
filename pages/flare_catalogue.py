@@ -169,7 +169,7 @@ with details_container:
                     try:
                         fig = pooch.retrieve(url=crocs_link, known_hash=None, progressbar=False)
                         st.image(fig)
-                    except ConnectionError:
+                    except:
                         pass
                     # st.image(crocs_link)
             # st.image(grid2['selected_rows']['IP Radio Bursts'].values[0])

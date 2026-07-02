@@ -166,8 +166,11 @@ with details_container:
             st.write(grid2['selected_rows'])
             for crocs_link in grid2['selected_rows']['IP Radio Bursts'].values:
                 with st.spinner("Downloading figure...", show_time=True):
-                    fig = pooch.retrieve(url=crocs_link, known_hash=None, progressbar=False)
-                    st.image(fig)
+                    try:
+                        fig = pooch.retrieve(url=crocs_link, known_hash=None, progressbar=False)
+                        st.image(fig)
+                    except ConnectionError:
+                        pass
                     # st.image(crocs_link)
             # st.image(grid2['selected_rows']['IP Radio Bursts'].values[0])
             st.write('Plots obtained from https://parker.gsfc.nasa.gov/crocs.html')

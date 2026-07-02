@@ -52,7 +52,7 @@ st.multiselect("Select columns to display (by default only a selection is active
 hidden_columns = df_cme_org.keys().tolist()
 if 'selected_columns_cme' in st.session_state:
     df_cme = df_cme_org[st.session_state.selected_columns_cme]
-    # hidden_columns = hidden_columns.remove('CME IDX')
+    # hidden_columns = hidden_columns.remove('CME_IDX')
     # st.write([col for col in st.session_state.selected_columns_cme])
     for col in st.session_state.selected_columns_cme:
         hidden_columns.remove(col)

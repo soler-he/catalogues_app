@@ -7,7 +7,7 @@ pg = setup()  # calls download_catalogues() internally
 failed = download_catalogues()
 
 if failed:
-    download_catalogues.clear()  # remove to check if it is causing segmentation faults
+    # download_catalogues.clear()  # removed to check if it is causing segmentation faults
     msg = "**Failed to download the following catalogues:**\n"
     for fname, reason in failed:
         msg += f"- `{fname}`: {reason}\n"

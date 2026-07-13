@@ -1,9 +1,43 @@
 import base64
 import os
+import requests
 import streamlit as st
+
+# obtain catalogue files from GitHub repository https://github.com/soler-he/catalogues
+BASE_URL = "https://raw.githubusercontent.com/soler-he/catalogues/main/"
+
+CATALOGUE_FILES = [
+    'SOLER_CME_catalogue.csv',
+    'SOLER_Flare_catalogue.csv',
+    'SOLER_SEP_catalogue.csv',
+]
+
+
+@st.cache_resource  # runs once per app session, not once per page/rerun
+def download_catalogues():
+    os.makedirs('catalogues', exist_ok=True)
+    failed = []
+    for fname in CATALOGUE_FILES:
+        fpath = os.path.join('catalogues', fname)
+        if not os.path.exists(fpath):
+            try:
+                response = requests.get(f'{BASE_URL}{fname}', timeout=10)
+                response.raise_for_status()
+                with open(fpath, 'w', encoding='utf-8') as f:
+                    f.write(response.text)
+            except Exception as e:
+                failed.append((fname, str(e)))
+    if failed:
+        msg = "**Failed to download the following catalogues:**\n"
+        for fname, reason in failed:
+            msg += f"- `{fname}`: {reason}\n"
+        msg += "\nPlease reload the page. If the problem persists, the catalogue server may be temporarily unavailable."
+        st.error(msg)
+        st.stop()
 
 
 def setup():
+    download_catalogues()
     st.set_page_config(
         page_title="SOLER Catalogues",
         page_icon="images/SOLER_Favicon-150x150.png",  # "☀️",  # 🔆

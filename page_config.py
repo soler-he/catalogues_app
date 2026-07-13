@@ -19,22 +19,21 @@ CATALOGUE_FILES = [
 
 @st.cache_resource(show_spinner=False)  # runs once per app session, not once per page/rerun
 def download_catalogues():
-    os.makedirs('catalogues', exist_ok=True)
+    CATALOGUE_DIR.mkdir(exist_ok=True)
     failed = []
     for fname in CATALOGUE_FILES:
-        fpath = os.path.join('catalogues', fname)
-        if not os.path.exists(fpath):
+        fpath = CATALOGUE_DIR / fname
+        if not fpath.exists():
             try:
                 response = requests.get(f'{BASE_URL}{fname}', timeout=10)
                 response.raise_for_status()
-                with open(fpath, 'w', encoding='utf-8') as f:
-                    f.write(response.text)
-                print(f"{fname}: download successful")
+                fpath.write_text(response.text, encoding='utf-8')
+                print(f"{fname}: downloaded successfully to {fpath}")
             except Exception as e:
                 failed.append((fname, str(e)))
                 print(f"{fname}: download failed ({e})")
         else:
-            print(f"{fname}: already exists (skipped)")
+            print(f"{fname}: already exists at {fpath} (skipped)")
     return failed  # return failures instead of calling st.stop() here
 
 

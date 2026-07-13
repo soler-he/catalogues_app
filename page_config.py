@@ -85,18 +85,6 @@ def setup():
         unsafe_allow_html=True,
     )
 
-    # download catalogues from GitHub repository
-    with st.spinner("Downloading catalogues, please wait..."):
-        failed = download_catalogues()
-    if failed:
-        download_catalogues.clear()  # clear cache so next reload retries
-        msg = "**Failed to download the following catalogues:**\n"
-        for fname, reason in failed:
-            msg += f"- `{fname}`: {reason}\n"
-        msg += "\nPlease reload the page. If the problem persists, the catalogue server may be temporarily unavailable."
-        st.error(msg)
-        st.stop()
-
     return pg
 
 

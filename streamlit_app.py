@@ -1,10 +1,10 @@
 import streamlit as st
 from page_config import setup, download_catalogues
 
-pg = setup()
+pg = setup()  # calls download_catalogues() internally
 
-with st.spinner("Downloading catalogues, please wait..."):
-    failed = download_catalogues()
+# instant cache hit — just retrieve result to show errors
+failed = download_catalogues()
 
 if failed:
     download_catalogues.clear()  # remove to check if it is causing segmentation faults

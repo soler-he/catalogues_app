@@ -38,6 +38,7 @@ def download_catalogues():
 
 
 def setup():
+    download_catalogues()  # cached — only downloads once, but guaranteed to run first
     st.set_page_config(
         page_title="SOLER Catalogues",
         page_icon="images/SOLER_Favicon-150x150.png",  # "☀️",  # 🔆

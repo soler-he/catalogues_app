@@ -18,6 +18,11 @@ st.page_link("pages/sep_catalogue.py", label="SEP catalogue", icon="3️⃣")
 
 
 st.markdown("""
+            #### Citing
+            To cite these catalogues, please obtain the citation from the corresponding [Zenodo entry](https://doi.org/10.5281/zenodo.21370766), where you can generate different citation styles on the bottom right of the page.
+            """, unsafe_allow_html=True)
+
+st.markdown("""
             #### Acknowledgement
 
             <img hspace="10px" align="right" height="80px" src="https://github.com/user-attachments/assets/28c60e00-85b4-4cf3-a422-6f0524c42234" alt="EU flag">
